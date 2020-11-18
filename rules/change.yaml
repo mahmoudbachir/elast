@@ -1,0 +1,44 @@
+# (Required)
+# Rule name, must be unique
+name: Service Uptime Monitoring + Alerting
+
+# (Required)
+# Type of alert.
+# the change rule will alert when a certain field changes in two documents within a timeframe
+type: change
+
+# (Required)
+# Index to search, wildcard supported
+index: heartbeat-*
+
+# (Required, change specific)
+# The field to look for changes in
+compare_key: monitor.status
+
+# (Required, change specific)
+# Ignore documents without the compare_key (country_name) field
+ignore_null: true
+
+# (Required, change specific)
+# The change must occur in two documents with the same query_key
+query_key: agent.hostname
+
+# (Required, change specific)
+# The value of compare_key must change in two events that are less than timeframe apart to trigger an alert
+timeframe:
+  days: 1
+
+# (Required)
+# A list of Elasticsearch filters used for find events
+# These filters are joined with AND and nested in a filtered query
+# For more info: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html
+#filter:
+#- query:
+#    query_string:
+#      query: "document_type: login"
+
+alert:
+- slack:
+        slack_webhook_uri: "https://hooks.slack.com/services/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"
+        slack_username_override: "elastalert"
+
