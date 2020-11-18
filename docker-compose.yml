@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+    ealert:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: elastalert:tag
+        container_name: elastalert_tox
+        working_dir: /home/elastalert
+        volumes:
+            - ./:/home/elastalert/
