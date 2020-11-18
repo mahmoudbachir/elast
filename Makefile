@@ -1,7 +1,3 @@
-installgit:
-	choco install git -s"'https://chocolatey.org/api/v2/'"
-	refreshenv
-
 dockerbuild:
 	docker-compose --project-name elastalert build ealert
 
@@ -16,7 +12,6 @@ setupdocker:
 	startDocker.ps1
 
 firstdocker:
-	make installgit
 	make setupdocker
 	make dockerbuild
 	make dockerrun
